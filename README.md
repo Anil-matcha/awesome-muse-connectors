@@ -377,3 +377,5 @@ Before opening a pull request, follow the relevant checklist in [CONTRIBUTING.md
 MIT. See [LICENSE](LICENSE).
 
 Maintained by [Anil Chandra Naidu Matcha](https://github.com/Anil-matcha).
+
+- [night-market](https://github.com/athola/claude-night-market) - 100+ curated skills for code review, testing, docs, and architecture.
