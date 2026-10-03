@@ -2,7 +2,6 @@
 name: Template submission
 about: Suggest a focused, copy-paste Muse workflow
 title: "[Template] "
-labels: template
 assignees: ''
 ---
 
