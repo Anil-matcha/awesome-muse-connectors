@@ -82,7 +82,7 @@ Connector access is not guaranteed just because a browser can reach a service. F
 | [Connector catalog](connectors/README.md) | Meta-named integrations and community connector skills |
 | [Agent workflow templates](#agent-workflow-templates) | Existing prompts for using Muse and integrations safely |
 | [Choose a template](#choose-the-right-template) | Quick guide by job-to-be-done |
-| [Template catalog](#template-catalog) | The 12 supporting briefs and approval levels |
+| [Template catalog](#template-catalog) | The 13 supporting briefs and approval levels |
 | [Permission model](#permission-model) | How to stage access safely |
 | [Safety defaults](#safety-defaults) | Boundaries for sensitive and irreversible actions |
 | [Official context and sources](#official-context-and-sources) | Muse product behavior and availability sources |
@@ -91,7 +91,7 @@ Connector access is not guaranteed just because a browser can reach a service. F
 
 | Area | Templates |
 |---|---|
-| Personal workflow | [Chief of Staff](templates/chief-of-staff.md) · [Goal Tracker](templates/goal-tracker.md) · [Persistent Coach](templates/persistent-coach.md) |
+| Personal workflow | [Chief of Staff](templates/chief-of-staff.md) · [Goal Tracker](templates/goal-tracker.md) · [Persistent Coach](templates/persistent-coach.md) · [Prayer Keeper Lite](templates/prayer-keeper-lite.md) |
 | Research and knowledge | [Research Brief](templates/research-brief.md) · [Competitive Watch](templates/competitive-watch.md) |
 | Communication and operations | [Inbox Triage](templates/inbox-triage.md) · [Customer Ops Triage](templates/customer-ops-triage.md) |
 | Travel and money | [Travel Planner](templates/travel-planner.md) · [Subscription Auditor](templates/subscription-auditor.md) |
@@ -120,6 +120,7 @@ The table below is the quick scan. Each linked file contains the full prompt and
 | [Chief of Staff](templates/chief-of-staff.md) | Priorities, daily plans, and open loops | Calendar, email, notes, tasks | Draft first; approve changes and messages |
 | [Goal Tracker](templates/goal-tracker.md) | Long-running personal or project goals | Goal notes, calendar, tasks | Track automatically; approve commitments |
 | [Persistent Coach](templates/persistent-coach.md) | A coach that remembers you across sessions | Pack name, license key, onboarding answers | Install freely; approve purchases |
+| [Prayer Keeper Lite](templates/prayer-keeper-lite.md) | A free prayer-request keeper with daily digest | Prayer requests (up to 10 active) | Free tier; approve paid upgrade |
 | [Research Brief](templates/research-brief.md) | Source-backed answers and options | Web, documents, notes | Research only; no outreach |
 | [Competitive Watch](templates/competitive-watch.md) | Dated monitoring and change logs | Public web sources, notes | Monitor and report; approve sharing |
 | [Inbox Triage](templates/inbox-triage.md) | Sorting, summarizing, and drafting | Email, calendar, tasks | Read/draft only; approve mailbox changes |
