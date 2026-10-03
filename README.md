@@ -91,7 +91,7 @@ Connector access is not guaranteed just because a browser can reach a service. F
 
 | Area | Templates |
 |---|---|
-| Personal workflow | [Chief of Staff](templates/chief-of-staff.md) · [Goal Tracker](templates/goal-tracker.md) |
+| Personal workflow | [Chief of Staff](templates/chief-of-staff.md) · [Goal Tracker](templates/goal-tracker.md) · [Persistent Coach](templates/persistent-coach.md) |
 | Research and knowledge | [Research Brief](templates/research-brief.md) · [Competitive Watch](templates/competitive-watch.md) |
 | Communication and operations | [Inbox Triage](templates/inbox-triage.md) · [Customer Ops Triage](templates/customer-ops-triage.md) |
 | Travel and money | [Travel Planner](templates/travel-planner.md) · [Subscription Auditor](templates/subscription-auditor.md) |
@@ -119,6 +119,7 @@ The table below is the quick scan. Each linked file contains the full prompt and
 |---|---|---|---|
 | [Chief of Staff](templates/chief-of-staff.md) | Priorities, daily plans, and open loops | Calendar, email, notes, tasks | Draft first; approve changes and messages |
 | [Goal Tracker](templates/goal-tracker.md) | Long-running personal or project goals | Goal notes, calendar, tasks | Track automatically; approve commitments |
+| [Persistent Coach](templates/persistent-coach.md) | A coach that remembers you across sessions | Pack name, license key, onboarding answers | Install freely; approve purchases |
 | [Research Brief](templates/research-brief.md) | Source-backed answers and options | Web, documents, notes | Research only; no outreach |
 | [Competitive Watch](templates/competitive-watch.md) | Dated monitoring and change logs | Public web sources, notes | Monitor and report; approve sharing |
 | [Inbox Triage](templates/inbox-triage.md) | Sorting, summarizing, and drafting | Email, calendar, tasks | Read/draft only; approve mailbox changes |
