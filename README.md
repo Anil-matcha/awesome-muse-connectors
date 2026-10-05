@@ -5,8 +5,8 @@
 [![Connectors](https://img.shields.io/badge/connector-catalog-0ea5e9)](connectors/)
 
 
-<p align="center"><a href="https://youtu.be/hROKO0dG_a0"><img src="https://i.ytimg.com/vi/hROKO0dG_a0/maxresdefault.jpg" width="720"></a></p>
-<p align="center"><a href="https://youtu.be/hROKO0dG_a0"><b>▶ Watch: Free Open Source Meta Muse Alternative: Unlimited, Any Model </b></a></p>
+<p align="center"><a href="https://youtu.be/gr3LiztMriQ"><img src="https://i.ytimg.com/vi/gr3LiztMriQ/maxresdefault.jpg" width="720"></a></p>
+<p align="center"><a href="https://youtu.be/gr3LiztMriQ"><b>▶ Watch: Free Open Source Instinct AI Alternative: Unlimited, Any Model </b></a></p>
 
 </div>
 
