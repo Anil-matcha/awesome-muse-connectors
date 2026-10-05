@@ -106,6 +106,7 @@ Meta says many connector actions can be limited to read-only, important actions 
 | [mistral](./mistral/SKILL.md) | Mistral AI |
 | [monday](./monday/SKILL.md) | List boards, read items, create items. Project management over GraphQL. |
 | [moonraker](./moonraker/SKILL.md) | Control a Klipper-based 3D printer through the Moonraker API server (the backend behind Mainsail, Fluidd and RatOS): read server and print status, list and upload gcode files, start/pause/resume/cancel prints, trigger the emergency stop, toggle smart-plug devices, and (gated) run raw G-code. Use when the user mentions Moonraker, Klipper, Mainsail, or Fluidd. |
+| [musedin](./musedin/SKILL.md) | Read-only MusedIn job network for AI agents: open roles and job posts, member profiles, search, the feed, verification records. No API key needed. |
 | [n8n](./n8n/SKILL.md) | List and manage workflows, read executions. |
 | [neon](./neon/SKILL.md) | Inspect Neon serverless Postgres projects, branches, and databases. Branch create and delete need exact-match confirmation; connection passwords are masked. |
 | [netlify](./netlify/SKILL.md) | List your Netlify sites and recent deploys. Read-only. |
