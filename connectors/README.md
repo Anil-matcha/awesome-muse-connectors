@@ -75,6 +75,7 @@ Meta says many connector actions can be limited to read-only, important actions 
 | [flyio](./flyio/SKILL.md) | List apps and machines, manage machine lifecycle. |
 | [framer](./framer/SKILL.md) | Verify a Framer project |
 | [front](./front/SKILL.md) | Read your Front shared inbox, and reply, assign teammates, and add tags on conversations (writes need --confirm). |
+| [fxmacrodata](./fxmacrodata/SKILL.md) | Macro indicator history, release calendars, and FX spot rates for 22 currencies. Read-only; USD works without a key. |
 | [gemini](./gemini/SKILL.md) | Google Gemini media generation: Nano Banana images, Imagen 4 images, Veo video, TTS, model listing. |
 | [github](./github/SKILL.md) | View your profile, list repos, list open issues, and create issues. |
 | [gitlab](./gitlab/SKILL.md) | Your GitLab user, projects, open merge requests, and issue creation. |
