@@ -58,6 +58,9 @@ OPENER = urllib.request.build_opener(SameHostRedirect)
 def attach_key(req: urllib.request.Request) -> str:
     """Attach the key to the X-API-Key header. Returns the auth mode used."""
     key = os.environ.get(ENV_KEY, "").strip()
+    if any(ch.isspace() or not ch.isprintable() for ch in key):
+        # Never echo the key itself in the error.
+        sys.exit(f"error: {ENV_KEY} contains whitespace or control characters")
     if key:
         req.add_header("X-API-Key", key)
         return "env"
