@@ -28,6 +28,7 @@ This is an independent community collection. It is not affiliated with, endorsed
 - [Awesome OpenClaw](https://github.com/Anil-matcha/awesome-openclaw) — self-hosted agent resources, skills, and integrations.
 - [Awesome Hermes Agent](https://github.com/Anil-matcha/awesome-hermes-agent) — agent workflows and creator-focused automation resources.
 - [MuseBot](https://github.com/yincongcyincong/MuseBot) — a separate open-source, multi-platform chatbot implementation.
+- [FeeGuard](https://feeguard.dev) — Checks Stripe Connect refunds and disputes for unreversed transfers, unadjusted application fees, and uncovered platform losses.
 
 ## Connector catalog
 
