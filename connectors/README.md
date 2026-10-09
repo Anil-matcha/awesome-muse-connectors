@@ -98,6 +98,7 @@ Meta says many connector actions can be limited to read-only, important actions 
 | [letta](./letta/SKILL.md) | Work with Letta agent memory: list agents, read core-memory blocks, list or add archival passages, create blocks, message an agent to record memory. |
 | [linear](./linear/SKILL.md) | View your assigned issues and create issues, over Linear |
 | [lob](./lob/SKILL.md) | Send physical mail through Lob |
+| [lodestone](./lodestone/SKILL.md) | One per-user key for Meta Ads, Instagram insights, GA4, email, Telegram, Typefully, and image/video generation (39 tools; anything that sends or spends needs --confirm). |
 | [loops](./loops/SKILL.md) | Manage email contacts, trigger loops, send transactional email. |
 | [luma](./luma/SKILL.md) | Luma Dream Machine video generation: text-to-video and image-to-video, status polling, cancel, image upload. |
 | [mastodon](./mastodon/SKILL.md) | Read and write Mastodon: verify the account, list own posts and followers, publish toots with native scheduling, upload media. |
