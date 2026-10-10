@@ -56,6 +56,7 @@ Meta says many connector actions can be limited to read-only, important actions 
 | [cloudinary](./cloudinary/SKILL.md) | Manage media on Cloudinary through the Upload and Admin APIs: upload images and videos, list and inspect assets, update metadata and tags, delete assets, and check plan usage (credits, storage, bandwidth, transformations). |
 | [cohesivity](./cohesivity/SKILL.md) | provision on-the-fly backend infrastructure including Postgres, Redis, object storage, hosting, auth, AI APIs. No API keys or account to get started; the agent signs up on its own. |
 | [coda](./coda/SKILL.md) | List docs, read tables and rows, add rows. Your docs as a database. |
+| [datacircle](./datacircle/SKILL.md) | Datacircle is a data co-op. Query your favorite B2B data APIs through us. Same request, same price, no markup. |
 | [deepgram](./deepgram/SKILL.md) | Transcribe prerecorded audio files to text (with optional diarization, summaries, topics, sentiment) and synthesize speech with Deepgram |
 | [deepl](./deepl/SKILL.md) | Translate text between 30+ languages, check usage. |
 | [deepseek](./deepseek/SKILL.md) | Chat with DeepSeek |
