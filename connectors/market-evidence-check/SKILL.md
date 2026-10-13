@@ -45,4 +45,4 @@ The check prints one JSON object: the API response plus `http_status`. Valid inp
 - bin/market_evidence_check.py
 
 ## Maturity
-🧪 Draft: CLI live-tested against the public API on 2026-10-06 (health HTTP 200; BTC-USDT sample GO; invalid side HTTP 400 / REJECT). Catalog one-paste install path not yet externally installed.
+🧪 Draft: On 2026-10-08 an external user installed a reusable read-only skill from our public `muse.md` and `openapi.json` and passed three smoke checks (health HTTP 200; BTC-USDT sample GO; invalid input REJECT). This covers the brief/OpenAPI installation route only. The catalog one-paste install path and the CLI in this PR remain externally unverified.
