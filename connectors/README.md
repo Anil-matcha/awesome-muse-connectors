@@ -56,6 +56,7 @@ Meta says many connector actions can be limited to read-only, important actions 
 | [cloudinary](./cloudinary/SKILL.md) | Manage media on Cloudinary through the Upload and Admin APIs: upload images and videos, list and inspect assets, update metadata and tags, delete assets, and check plan usage (credits, storage, bandwidth, transformations). |
 | [cohesivity](./cohesivity/SKILL.md) | provision on-the-fly backend infrastructure including Postgres, Redis, object storage, hosting, auth, AI APIs. No API keys or account to get started; the agent signs up on its own. |
 | [coda](./coda/SKILL.md) | List docs, read tables and rows, add rows. Your docs as a database. |
+| [datacircle](./datacircle/SKILL.md) | Datacircle is a data co-op. Query your favorite B2B data APIs through us. Same request, same price, no markup. |
 | [deepgram](./deepgram/SKILL.md) | Transcribe prerecorded audio files to text (with optional diarization, summaries, topics, sentiment) and synthesize speech with Deepgram |
 | [deepl](./deepl/SKILL.md) | Translate text between 30+ languages, check usage. |
 | [deepseek](./deepseek/SKILL.md) | Chat with DeepSeek |
@@ -83,6 +84,7 @@ Meta says many connector actions can be limited to read-only, important actions 
 | [google-nest](./google-nest/SKILL.md) | Read traits and execute commands on Google Nest devices through the Smart Device Management (SDM) API: thermostats (mode, setpoints, ambient readings), cameras and doorbells (events, live-stream generation). Use it when the user asks about their Nest thermostat, wants to change heating/cooling, or wants camera/doorbell state. Thermostat commands start or stop real HVAC, so they are confirmation-gated (see Operating Rules). |
 | [gumroad](./gumroad/SKILL.md) | View your Gumroad products and sales. Read-only by design. |
 | [heygen](./heygen/SKILL.md) | HeyGen avatar and talking-head video: prompt-to-video agent, multi-scene avatar video, status polling, avatar and voice lists. |
+| [html-docs](./html-docs/SKILL.md) | Search, read, create, edit, and review collaborative HTML Docs documents. |
 | [home-assistant](./home-assistant/SKILL.md) | Read entity states and call services on your Home Assistant instance. Service calls are confirmed first. |
 | [homey](./homey/SKILL.md) | Read device state and write capability values on a Homey Pro (local) or Homey cloud account through the Homey Web API: lights and outlets, dimmers and color, thermostats, connected locks, blinds and curtains, plus listing Flows (automations). Use it when the user asks about or wants to change anything paired to their Homey. Writes drive real physical hardware, so they are confirmation-gated (see Operating Rules). |
 | [hubitat](./hubitat/SKILL.md) | Read device states and invoke capability commands on a Hubitat Elevation hub through the official Maker API app: lights and dimmers, deadbolt locks, garage door controllers, thermostats, location modes, and the Hubitat Safety Monitor (HSM). Use it when the user asks about or wants to change anything paired to their Hubitat hub. Commands drive real physical hardware, so writes are confirmation-gated (see Operating Rules). |
@@ -98,6 +100,7 @@ Meta says many connector actions can be limited to read-only, important actions 
 | [letta](./letta/SKILL.md) | Work with Letta agent memory: list agents, read core-memory blocks, list or add archival passages, create blocks, message an agent to record memory. |
 | [linear](./linear/SKILL.md) | View your assigned issues and create issues, over Linear |
 | [lob](./lob/SKILL.md) | Send physical mail through Lob |
+| [lodestone](./lodestone/SKILL.md) | One per-user key for Meta Ads, Instagram insights, GA4, email, Telegram, Typefully, and image/video generation (39 tools; anything that sends or spends needs --confirm). |
 | [looot](./looot/SKILL.md) | Search a catalog of 2,500+ data API endpoints (work emails, phones, company and people search, web pages, news), see the price, and run them from one prepaid balance. |
 | [loops](./loops/SKILL.md) | Manage email contacts, trigger loops, send transactional email. |
 | [luma](./luma/SKILL.md) | Luma Dream Machine video generation: text-to-video and image-to-video, status polling, cancel, image upload. |
@@ -108,6 +111,7 @@ Meta says many connector actions can be limited to read-only, important actions 
 | [monday](./monday/SKILL.md) | List boards, read items, create items. Project management over GraphQL. |
 | [moonraker](./moonraker/SKILL.md) | Control a Klipper-based 3D printer through the Moonraker API server (the backend behind Mainsail, Fluidd and RatOS): read server and print status, list and upload gcode files, start/pause/resume/cancel prints, trigger the emergency stop, toggle smart-plug devices, and (gated) run raw G-code. Use when the user mentions Moonraker, Klipper, Mainsail, or Fluidd. |
 | [musedin](./musedin/SKILL.md) | Read-only MusedIn job network for AI agents: open roles and job posts, member profiles, search, the feed, verification records. No API key needed. |
+| [mushare](./mushare/SKILL.md) | Assistant-to-assistant messaging: your Muse messages your friends' Muse — ask with tap-to-answer options, share found items as cards, split bills, check replies. Installs from mushare.ai. |
 | [n8n](./n8n/SKILL.md) | List and manage workflows, read executions. |
 | [neon](./neon/SKILL.md) | Inspect Neon serverless Postgres projects, branches, and databases. Branch create and delete need exact-match confirmation; connection passwords are masked. |
 | [netlify](./netlify/SKILL.md) | List your Netlify sites and recent deploys. Read-only. |

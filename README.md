@@ -28,6 +28,7 @@ This is an independent community collection. It is not affiliated with, endorsed
 - [Awesome OpenClaw](https://github.com/Anil-matcha/awesome-openclaw) — self-hosted agent resources, skills, and integrations.
 - [Awesome Hermes Agent](https://github.com/Anil-matcha/awesome-hermes-agent) — agent workflows and creator-focused automation resources.
 - [MuseBot](https://github.com/yincongcyincong/MuseBot) — a separate open-source, multi-platform chatbot implementation.
+- [Muse API examples](https://github.com/useapi/muse-api) — a separate third-party REST API (useapi.net) that makes Meta Muse images and 10-second videos with sound from code, on your own Muse account; Node.js, Python and an agent skill. Not affiliated with Meta.
 
 ## Connector catalog
 
