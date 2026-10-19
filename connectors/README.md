@@ -184,7 +184,7 @@ Meta says many connector actions can be limited to read-only, important actions 
 | [wise](./wise/SKILL.md) | View Wise profiles and multi-currency balances. Read-only by design. |
 | [x](./x/SKILL.md) | Post, search, like, DM. Note: no usable free read tier. |
 | [xai](./xai/SKILL.md) | Query Grok chat completions and list available Grok models through xAI |
-| [ynab](./ynab/SKILL.md) | Read and write YNAB budgets: list budgets, accounts, balances, transactions, and categories; record transactions. |
+| [ynab](./ynab/SKILL.md) | Read YNAB budgets in dollars — plans, accounts, categories with goal targets, month funding and activity, transactions with filters — plus the guarded-write pattern (dry-run, snapshot, verify, audit log) for any change. |
 | [youtube](./youtube/SKILL.md) | Read channels and videos, search, plus uploads and comments with confirmation. |
 | [zep](./zep/SKILL.md) | Work with Zep |
 
