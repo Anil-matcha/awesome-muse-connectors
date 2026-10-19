@@ -52,7 +52,7 @@ Meta says many connector actions can be limited to read-only, important actions 
 | [cartesia](./cartesia/SKILL.md) | Generate spoken audio from text with Cartesia |
 | [clerk](./clerk/SKILL.md) | List, create, update, and delete users. |
 | [clickup](./clickup/SKILL.md) | List ClickUp workspaces and tasks, and create tasks. |
-| [cloudflare](./cloudflare/SKILL.md) | List your Cloudflare zones and read DNS records. Read-only. |
+| [cloudflare](./cloudflare/SKILL.md) | Full Cloudflare operations: token verification (user and account-owned tokens), accounts, zones, DNS read/add, Pages project + direct-upload deploys, Workers deploy with KV bindings, Worker secrets and routes. Writes are confirmation-gated. |
 | [cloudinary](./cloudinary/SKILL.md) | Manage media on Cloudinary through the Upload and Admin APIs: upload images and videos, list and inspect assets, update metadata and tags, delete assets, and check plan usage (credits, storage, bandwidth, transformations). |
 | [cohesivity](./cohesivity/SKILL.md) | provision on-the-fly backend infrastructure including Postgres, Redis, object storage, hosting, auth, AI APIs. No API keys or account to get started; the agent signs up on its own. |
 | [coda](./coda/SKILL.md) | List docs, read tables and rows, add rows. Your docs as a database. |
