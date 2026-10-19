@@ -81,6 +81,7 @@ Meta says many connector actions can be limited to read-only, important actions 
 | [gemini](./gemini/SKILL.md) | Google Gemini media generation: Nano Banana images, Imagen 4 images, Veo video, TTS, model listing. |
 | [github](./github/SKILL.md) | View your profile, list repos, list open issues, and create issues. |
 | [gitlab](./gitlab/SKILL.md) | Your GitLab user, projects, open merge requests, and issue creation. |
+| [google-maps](./google-maps/SKILL.md) | Routes with traffic, travel times, and geocoding — with quota caps that keep it inside the free tier. |
 | [google-nest](./google-nest/SKILL.md) | Read traits and execute commands on Google Nest devices through the Smart Device Management (SDM) API: thermostats (mode, setpoints, ambient readings), cameras and doorbells (events, live-stream generation). Use it when the user asks about their Nest thermostat, wants to change heating/cooling, or wants camera/doorbell state. Thermostat commands start or stop real HVAC, so they are confirmation-gated (see Operating Rules). |
 | [gumroad](./gumroad/SKILL.md) | View your Gumroad products and sales. Read-only by design. |
 | [heygen](./heygen/SKILL.md) | HeyGen avatar and talking-head video: prompt-to-video agent, multi-scene avatar video, status polling, avatar and voice lists. |
