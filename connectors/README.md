@@ -117,6 +117,7 @@ Meta says many connector actions can be limited to read-only, important actions 
 | [newsapi](./newsapi/SKILL.md) | Top headlines and full-text news search. Read-only. |
 | [notion](./notion/SKILL.md) | Search and query Notion, plus create pages, append blocks, and update page properties (writes need --confirm). |
 | [octoprint](./octoprint/SKILL.md) | Control an OctoPrint 3D printer over its local REST API: read printer state and temperatures, monitor print progress, start/pause/cancel/restart jobs, upload and select gcode files, set hotend and bed temperatures, jog or home axes, and (gated) run raw G-code. Use when the user mentions their OctoPrint instance or a printer it drives. |
+| [onedrive](./onedrive/SKILL.md) | OneDrive via Microsoft Graph: list, search, download, upload, mkdir, rename, move, recycle — with confirm-before-write and the Personal Vault always off-limits. |
 | [openai](./openai/SKILL.md) | Check your OpenAI API access and list the models your key can use. Read-only. |
 | [openrouter](./openrouter/SKILL.md) | Browse the model catalog with per-token pricing; check your key usage. Read-only. |
 | [openweathermap](./openweathermap/SKILL.md) | Current weather and 5-day forecast for any city. Read-only. |
