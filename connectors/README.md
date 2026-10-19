@@ -160,6 +160,7 @@ Meta says many connector actions can be limited to read-only, important actions 
 | [supabase](./supabase/SKILL.md) | List tables, query rows, and insert/update/delete rows in your Supabase Postgres database. |
 | [supermemory](./supermemory/SKILL.md) | Store and recall with Supermemory: add memories and documents, hybrid search, upload files, tune settings. |
 | [switchbot](./switchbot/SKILL.md) | Read status and send commands to SwitchBot devices over the official OpenAPI v1.1: SwitchBot Bot (physical button presser), SwitchBot Lock, Curtain and Blind Tilt motors, plugs, lights, air conditioners, infrared remotes, and saved scenes. Use it when the user asks about or wants to change anything in their SwitchBot setup. Commands drive real physical hardware, so writes are confirmation-gated (see Operating Rules). |
+| [taasky](./taasky/SKILL.md) | Negotiate meeting times, prices and dates with another person or their agent: open or join a room, counter within private limits, check back. Accept, reject and withdraw are confirmed by the user in Telegram. |
 | [tally](./tally/SKILL.md) | List forms, read submissions, manage form blocks. |
 | [tavily](./tavily/SKILL.md) | Fast, clean web research: one call returns an AI answer plus ranked sources with snippets. Read-only. |
 | [telegram](./telegram/SKILL.md) | Send messages and read updates through your own Telegram bot. Bots can |
