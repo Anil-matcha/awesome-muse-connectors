@@ -39,6 +39,7 @@ Meta says many connector actions can be limited to read-only, important actions 
 | [asana](./asana/SKILL.md) | View your assigned Asana tasks and create new ones. |
 | [ashby](./ashby/SKILL.md) | Search Ashby public job boards (no key needed) and read/write the Ashby ATS: candidates, jobs, applications. |
 | [attio](./attio/SKILL.md) | Query CRM records, upsert by matching attribute, add notes and tasks. |
+| [bankbridge](./bankbridge/SKILL.md) | Read-only access to your connected bank accounts: balances, transactions, spending summaries, recurring charges, monthly cashflow, and investment holdings. Paid service ($5/mo per bank); demo key available. |
 | [beatoven](./beatoven/SKILL.md) | Beatoven.ai royalty-free music generation: compose tracks, poll tasks, download audio, fetch individual stems. |
 | [beehiiv](./beehiiv/SKILL.md) | List publications, subscribers, and posts; add subscribers. |
 | [black-forest-labs](./black-forest-labs/SKILL.md) | Black Forest Labs FLUX image generation: flux-2-pro and flux-2-flex text-to-image with async polling. |
