@@ -93,6 +93,7 @@ Meta says many connector actions can be limited to read-only, important actions 
 | [huggingface](./huggingface/SKILL.md) | Verify your Hugging Face account and search the model hub. Read-only. |
 | [hume-ai](./hume-ai/SKILL.md) | Synthesize speech with Hume |
 | [ideogram](./ideogram/SKILL.md) | Ideogram text-to-image generation with the strongest text rendering in the catalog: generate, edit, remix, upscale, describe, balance. |
+| [keenable](./keenable/SKILL.md) | Web search with ranked sources and snippets, plus page fetch as markdown. Read-only; works without an API key. |
 | [kit](./kit/SKILL.md) | Read and write Kit (ConvertKit): list subscribers, broadcasts, sequences, tags; draft broadcasts. |
 | [kling](./kling/SKILL.md) | Kling AI video generation with client-side JWT auth: text-to-video, image-to-video, status polling, clip extend, lip-sync. |
 | [langfuse](./langfuse/SKILL.md) | Query traces and observations, manage prompts and scores. |
