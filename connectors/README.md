@@ -48,6 +48,7 @@ Meta says many connector actions can be limited to read-only, important actions 
 | [buzzsprout](./buzzsprout/SKILL.md) | Manage podcast episodes on Buzzsprout: list and fetch episodes, create, update, or delete them, and list embed players. Use when the user wants to publish or manage podcast episodes on a Buzzsprout-hosted show. |
 | [calcom](./calcom/SKILL.md) | List bookings and event types, create bookings. |
 | [calendly](./calendly/SKILL.md) | Read and manage Calendly: list scheduled events, event types, invitees, and availability schedules; cancel bookings. |
+| [call-me](./call-me/SKILL.md) | Ring or text the user's own phone (iPhone or Android) and get their spoken answer back as text. Needs the paid /call-me app; no API key. |
 | [canva](./canva/SKILL.md) | Read and manage Canva designs through the Canva Connect API: list designs and folders, inspect a design, create designs, upload assets, and export designs. Exports are async jobs: submit with export, then poll with export-status until the job succeeds. |
 | [cartesia](./cartesia/SKILL.md) | Generate spoken audio from text with Cartesia |
 | [clerk](./clerk/SKILL.md) | List, create, update, and delete users. |
