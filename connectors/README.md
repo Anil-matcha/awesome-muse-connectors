@@ -44,6 +44,7 @@ Meta says many connector actions can be limited to read-only, important actions 
 | [black-forest-labs](./black-forest-labs/SKILL.md) | Black Forest Labs FLUX image generation: flux-2-pro and flux-2-flex text-to-image with async polling. |
 | [bluesky](./bluesky/SKILL.md) | Read timelines, search posts, post and follow. |
 | [brave-search](./brave-search/SKILL.md) | Independent web search from Brave |
+| [brewpage](./brewpage/SKILL.md) | Publish an HTML or Markdown file to an expiring BrewPage HTTPS link (unlisted by default, no account), then read, replace or delete it. Writes are confirmed first. |
 | [buttondown](./buttondown/SKILL.md) | Read and write Buttondown: list subscribers and emails, add subscribers, draft emails. |
 | [buzzsprout](./buzzsprout/SKILL.md) | Manage podcast episodes on Buzzsprout: list and fetch episodes, create, update, or delete them, and list embed players. Use when the user wants to publish or manage podcast episodes on a Buzzsprout-hosted show. |
 | [calcom](./calcom/SKILL.md) | List bookings and event types, create bookings. |
