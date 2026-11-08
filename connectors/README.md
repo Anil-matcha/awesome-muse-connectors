@@ -1,6 +1,6 @@
 # Muse connector catalog
 
-This catalog contains 150 community connector skills copied from the MIT-licensed `muse-connectors` project at commit `6e31fd44a71f9f28377a1460e64cd7483c3cce22` on September 24, 2026. The source copyright and license are retained in [`LICENSE`](LICENSE). These skills are community-built and are not Meta-maintained or Meta-verified. Read each skill, especially its `Auth`, `Operating Rules`, `Files`, and `Maturity` sections, before installation.
+This catalog contains 150 community connector skills copied from the MIT-licensed `muse-connectors` project at commit `6e31fd44a71f9f28377a1460e64cd7483c3cce22` on September 24, 2026, plus later community contributions. The source copyright and license are retained in [`LICENSE`](LICENSE). These skills are community-built and are not Meta-maintained or Meta-verified. Read each skill, especially its `Auth`, `Operating Rules`, `Files`, and `Maturity` sections, before installation.
 
 ## Meta built-in connectors
 
@@ -69,6 +69,7 @@ Meta says many connector actions can be limited to read-only, important actions 
 | [ecovacs](./ecovacs/SKILL.md) | Control Ecovacs DEEBOT robot vacuums through the official Ecovacs Open Platform: list bound robots, read robot state and battery, start/pause/resume/stop cleaning, send the robot back to its dock, and set the sweep/mop work mode. Use when the user mentions their DEEBOT or robot vacuum. |
 | [elai](./elai/SKILL.md) | Build AI avatar presenter videos with Elai: list available avatars, inspect videos and their render status, submit renders, and poll until a render finishes. Reach for this when the user wants a talking-head video generated from a script or slide deck. |
 | [elevenlabs](./elevenlabs/SKILL.md) | Check ElevenLabs subscription usage, list voices, and generate text-to-speech audio (TTS needs --confirm, spends characters). |
+| [equibles](./equibles/SKILL.md) | SEC filings and transcripts with line-level citations, XBRL statements, insider, 13F and congressional trades, daily prices. Read-only; free plan 100 requests a day. |
 | [etsy](./etsy/SKILL.md) | Read Etsy shop data: receipts, listings, transactions, payment ledger; create listings. |
 | [exa](./exa/SKILL.md) | Neural web search with page text: one call returns ranked sources with snippets. Read-only. |
 | [fal-ai](./fal-ai/SKILL.md) | Generate media with fal.ai: images, video, audio, music on one key. Submit jobs to 100s of models, poll status, fetch results, upload files. |
@@ -93,6 +94,7 @@ Meta says many connector actions can be limited to read-only, important actions 
 | [hume-ai](./hume-ai/SKILL.md) | Synthesize speech with Hume |
 | [ideogram](./ideogram/SKILL.md) | Ideogram text-to-image generation with the strongest text rendering in the catalog: generate, edit, remix, upscale, describe, balance. |
 | [kit](./kit/SKILL.md) | Read and write Kit (ConvertKit): list subscribers, broadcasts, sequences, tags; draft broadcasts. |
+| [kasm-form-frontdoor](./kasm-form-frontdoor/SKILL.md) | Form-login front door for KasmVNC: a standard HTML sign-in form and signed session-cookie gate in front of KasmVNC (HTTP/WebSocket proxying), so password managers and browser saved-login flows can sign in. KasmVNC's own authentication stays enabled behind the door. |
 | [kling](./kling/SKILL.md) | Kling AI video generation with client-side JWT auth: text-to-video, image-to-video, status polling, clip extend, lip-sync. |
 | [langfuse](./langfuse/SKILL.md) | Query traces and observations, manage prompts and scores. |
 | [leaf-agriculture](./leaf-agriculture/SKILL.md) | Read and manage farm data through Leaf Agriculture, a unified farm-data API that aggregates the partner-gated OEM platforms under self-serve access: John Deere, CNH Industrial (Case IH/New Holland), Climate FieldView, Trimble, Raven and AgLeader. The primitives it exposes (fields, boundaries, machine operation files for planting/harvest/application/tillage, plus as-applied irrigation) are exactly what a farmer-first fintech and supply-chain digitization product consumes. This is the practical route to partner-gated OEM data without a partnership agreement: individual provider connections need that grower |
