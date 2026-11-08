@@ -1,6 +1,6 @@
 # Muse connector catalog
 
-This catalog contains 150 community connector skills copied from the MIT-licensed `muse-connectors` project at commit `6e31fd44a71f9f28377a1460e64cd7483c3cce22` on September 24, 2026. The source copyright and license are retained in [`LICENSE`](LICENSE). These skills are community-built and are not Meta-maintained or Meta-verified. Read each skill, especially its `Auth`, `Operating Rules`, `Files`, and `Maturity` sections, before installation.
+This catalog contains 150 community connector skills copied from the MIT-licensed `muse-connectors` project at commit `6e31fd44a71f9f28377a1460e64cd7483c3cce22` on September 24, 2026, plus later community contributions. The source copyright and license are retained in [`LICENSE`](LICENSE). These skills are community-built and are not Meta-maintained or Meta-verified. Read each skill, especially its `Auth`, `Operating Rules`, `Files`, and `Maturity` sections, before installation.
 
 ## Meta built-in connectors
 
@@ -94,6 +94,7 @@ Meta says many connector actions can be limited to read-only, important actions 
 | [hume-ai](./hume-ai/SKILL.md) | Synthesize speech with Hume |
 | [ideogram](./ideogram/SKILL.md) | Ideogram text-to-image generation with the strongest text rendering in the catalog: generate, edit, remix, upscale, describe, balance. |
 | [kit](./kit/SKILL.md) | Read and write Kit (ConvertKit): list subscribers, broadcasts, sequences, tags; draft broadcasts. |
+| [kasm-form-frontdoor](./kasm-form-frontdoor/SKILL.md) | Form-login front door for KasmVNC: a standard HTML sign-in form and signed session-cookie gate in front of KasmVNC (HTTP/WebSocket proxying), so password managers and browser saved-login flows can sign in. KasmVNC's own authentication stays enabled behind the door. |
 | [kling](./kling/SKILL.md) | Kling AI video generation with client-side JWT auth: text-to-video, image-to-video, status polling, clip extend, lip-sync. |
 | [langfuse](./langfuse/SKILL.md) | Query traces and observations, manage prompts and scores. |
 | [leaf-agriculture](./leaf-agriculture/SKILL.md) | Read and manage farm data through Leaf Agriculture, a unified farm-data API that aggregates the partner-gated OEM platforms under self-serve access: John Deere, CNH Industrial (Case IH/New Holland), Climate FieldView, Trimble, Raven and AgLeader. The primitives it exposes (fields, boundaries, machine operation files for planting/harvest/application/tillage, plus as-applied irrigation) are exactly what a farmer-first fintech and supply-chain digitization product consumes. This is the practical route to partner-gated OEM data without a partnership agreement: individual provider connections need that grower |
