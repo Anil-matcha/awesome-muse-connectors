@@ -3,14 +3,25 @@
 
 Auth: loads the per-user `custom.discord` credential as a surrogate via the
 bundled dynamic_credentials helper. Discord bot tokens are sent as
-`Authorization: Bot <token>` (NOT Bearer), so the surrogate is applied to a
-custom header. The real token never touches this script: the runtime swaps
-the surrogate on approved egress, only to discord.com.
+`Authorization: Bot <token>` (NOT Bearer), so the credential uses a
+custom_header:Authorization placement. Muse's swap replaces the header value
+only when it is exactly the surrogate, so the stored credential must be the
+full `Bot <token>` string and this script sends the surrogate as the ENTIRE
+header value. A composite `Bot <surrogate>` header is not swapped and 401s.
+The real token never touches this script: the runtime swaps the surrogate on
+approved egress, only to discord.com.
+
+Scope: a bot sees only the servers it was invited to. It can never read the
+user's own direct messages; `dm` sends a DM FROM the bot.
+
+The read-only catch-up commands (`mentions`, `digest`) live in
+discord_catchup.py.
 """
 from __future__ import annotations
 
 import argparse
 import json
+import os
 import sys
 import urllib.error
 import urllib.parse
@@ -36,8 +47,21 @@ except ImportError:
     )
 
 
-def call(method: str, path: str, params: dict | None = None,
-         payload: dict | None = None):
+class ApiError(Exception):
+    """An HTTP error from Discord. `status` is None for network failures."""
+
+    def __init__(self, status, message: str, body: dict | None = None,
+                 headers=None):
+        super().__init__(message)
+        self.status = status
+        self.message = message
+        self.body = body or {}
+        self.headers = headers
+
+
+def request(method: str, path: str, params: dict | None = None,
+            payload: dict | None = None):
+    """Make one API call; raise ApiError instead of exiting."""
     url = API + path
     data = None
     headers = {}
@@ -52,19 +76,34 @@ def call(method: str, path: str, params: dict | None = None,
     except DynamicCredentialError as exc:
         sys.exit(f"error: credential problem: {exc}")
     req = urllib.request.Request(url, data=data, headers=headers, method=method)
-    req.add_header("Authorization", f"Bot {surrogate}")
+    # The stored value is the full "Bot <token>" string; send the surrogate as
+    # the whole header value so Muse's swap applies (see module docstring).
+    req.add_header("Authorization", surrogate)
     try:
         with urllib.request.urlopen(req, timeout=30) as resp:
             return read_json_response(resp)
     except urllib.error.HTTPError as exc:
+        body = {}
         try:
             body = json.loads(exc.read().decode("utf-8", errors="replace"))
             msg = body.get("message", str(exc))
         except Exception:
             msg = str(exc)
-        sys.exit(f"error: discord returned HTTP {exc.code}: {msg}")
+        if not isinstance(body, dict):
+            body = {}
+        raise ApiError(exc.code, msg, body, exc.headers) from None
     except Exception as exc:  # network-level failure
-        sys.exit(f"error: request failed: {exc}")
+        raise ApiError(None, str(exc)) from None
+
+
+def call(method: str, path: str, params: dict | None = None,
+         payload: dict | None = None):
+    try:
+        return request(method, path, params=params, payload=payload)
+    except ApiError as exc:
+        if exc.status is None:
+            sys.exit(f"error: request failed: {exc.message}")
+        sys.exit(f"error: discord returned HTTP {exc.status}: {exc.message}")
 
 
 def cmd_auth(_args):
@@ -140,10 +179,15 @@ def main():
     p.add_argument("--text", required=True)
     p.set_defaults(func=cmd_send)
 
-    p = sub.add_parser("dm", help="open a DM and send a message (confirm first)")
+    p = sub.add_parser("dm", help="send a DM from the bot to a user (confirm first); "
+                                  "cannot read the user's own DMs")
     p.add_argument("--user", required=True, help="user ID")
     p.add_argument("--text", required=True)
     p.set_defaults(func=cmd_dm)
+
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    import discord_catchup
+    discord_catchup.register(sub, sys.modules[__name__])
 
     args = parser.parse_args()
     if getattr(args, "limit", None) is not None and args.limit > 100:

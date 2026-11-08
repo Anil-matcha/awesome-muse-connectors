@@ -63,7 +63,7 @@ Meta says many connector actions can be limited to read-only, important actions 
 | [descript](./descript/SKILL.md) | Work with Descript |
 | [devto](./devto/SKILL.md) | Read and write dev.to: own profile, own articles (published, drafts, all), public articles by username, create and update articles with a safe draft default. |
 | [digitalocean](./digitalocean/SKILL.md) | List your DigitalOcean droplets and domains. Read-only. |
-| [discord](./discord/SKILL.md) | Read servers and channels, send messages and DMs. |
+| [discord](./discord/SKILL.md) | Read servers and channels, catch up on mentions and activity, send messages and bot DMs. |
 | [docusign](./docusign/SKILL.md) | Draft and send signature envelopes (demo environment by default), check envelope status, and download signed documents. |
 | [dub](./dub/SKILL.md) | Create short links, read analytics, track conversions. |
 | [ecovacs](./ecovacs/SKILL.md) | Control Ecovacs DEEBOT robot vacuums through the official Ecovacs Open Platform: list bound robots, read robot state and battery, start/pause/resume/stop cleaning, send the robot back to its dock, and set the sweep/mop work mode. Use when the user mentions their DEEBOT or robot vacuum. |
