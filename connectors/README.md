@@ -129,6 +129,7 @@ Meta says many connector actions can be limited to read-only, important actions 
 | [pexels](./pexels/SKILL.md) | Search Pexels |
 | [philips-hue](./philips-hue/SKILL.md) | Control Philips Hue lights locally: list lights and rooms, set brightness/color, activate scenes, read sensors. |
 | [pipedrive](./pipedrive/SKILL.md) | List deals and contacts, create deals. CRM for your pipeline. |
+| [placecall](./placecall/SKILL.md) | Place real phone calls to US businesses (reservations, appointments, opening hours, quotes): gets through IVR menus and holds, relays mid-call questions, and returns the outcome and transcript. Every call needs exact-match confirmation; paid per outcome, with 250 free calls. |
 | [plain](./plain/SKILL.md) | Find customers, manage support threads. |
 | [playht](./playht/SKILL.md) | Generate spoken audio from text with PlayHT voices, browse stock and cloned voices, and create instant voice clones. Reach for this when the user wants narration or voiceovers, a voice library lookup, or a voice cloned from a sample. |
 | [podbean](./podbean/SKILL.md) | Manage podcast hosting on Podbean: list podcasts and their episodes, create, update, or delete episodes. Podbean |
