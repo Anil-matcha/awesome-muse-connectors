@@ -4,14 +4,22 @@
 Taasky is a hosted MCP server (Streamable HTTP, JSON-RPC) where agents
 negotiate terms for their humans. This CLI calls its account endpoint with the
 user's Taasky key, so rooms are addressed by id and no per-room secret has to
-be stored. Accept, reject and withdraw are parked by the server until the
-human confirms in Telegram; this CLI cannot skip that.
+be stored.
+
+Auth: loads the per-user `custom.taasky` credential as a surrogate via the
+bundled dynamic_credentials helper. The real key never touches this script:
+the runtime swaps the surrogate on approved egress, only to mcp.taasky.ai.
+
+Accept, reject and withdraw are parked by the server until the human confirms
+on their own page of the room (human_url), or in Telegram if they turned it
+on. This CLI checks that on its side too: after `respond` and `cancel` it
+exits non-zero unless the server answered `status: "pending_human"` with a
+`human_url`, so a binding move never looks done without the human.
 """
 from __future__ import annotations
 
 import argparse
 import json
-import os
 import re
 import sys
 import urllib.error
@@ -19,33 +27,23 @@ import urllib.parse
 import urllib.request
 
 ENDPOINT = "https://mcp.taasky.ai/mcp/account"
-ALLOWED_HOST = "mcp.taasky.ai"
+ALLOWED_HOSTS = ("mcp.taasky.ai",)
 CREDENTIAL_NAME = "custom.taasky"
 HELPER_PATH = "/opt/hatch/skills/skill-creator/bin"
 
-
-def get_key() -> str:
-    key = os.environ.get("TAASKY_KEY", "").strip()
-    if key:
-        return key
-    try:
-        sys.path.insert(0, HELPER_PATH)
-        from dynamic_credentials import get_credential
-        key = (get_credential(CREDENTIAL_NAME) or "").strip()
-        if key:
-            return key
-    except Exception:
-        pass
+try:
+    sys.path.insert(0, HELPER_PATH)
+    from dynamic_credentials import DynamicCredentialError, add_surrogate_to_request
+except ImportError:
     sys.exit(
-        "error: no Taasky key. Set TAASKY_KEY, or on Muse collect it as "
-        f"{CREDENTIAL_NAME} via credentials.request_api_access. The user makes "
-        "one at https://mcp.taasky.ai/account."
+        "error: this CLI needs the Muse dynamic_credentials helper at "
+        f"{HELPER_PATH} (install this skill on a Muse runtime to use it)"
     )
 
 
 def rpc(method: str, params: dict | None = None) -> dict:
     host = urllib.parse.urlparse(ENDPOINT).hostname
-    if host != ALLOWED_HOST:
+    if host not in ALLOWED_HOSTS:
         sys.exit(f"error: refusing host {host}")
     body = {"jsonrpc": "2.0", "id": 1, "method": method}
     if params is not None:
@@ -54,13 +52,19 @@ def rpc(method: str, params: dict | None = None) -> dict:
         ENDPOINT,
         data=json.dumps(body).encode("utf-8"),
         headers={
-            "Authorization": f"Bearer {get_key()}",
             "Content-Type": "application/json",
             "Accept": "application/json, text/event-stream",
             "User-Agent": "taasky-muse-connector/1.0",
         },
         method="POST",
     )
+    try:
+        add_surrogate_to_request(req, CREDENTIAL_NAME, allowed_hosts=ALLOWED_HOSTS)
+    except DynamicCredentialError as exc:
+        sys.exit(
+            f"error: credential problem: {exc}. Collect the key as {CREDENTIAL_NAME} via "
+            "credentials.request_api_access; the user makes one at https://mcp.taasky.ai/account."
+        )
     try:
         with urllib.request.urlopen(req, timeout=60) as resp:
             raw = resp.read().decode("utf-8", "replace")
@@ -81,16 +85,47 @@ def rpc(method: str, params: dict | None = None) -> dict:
     return msg.get("result", {})
 
 
-def call(tool: str, arguments: dict) -> None:
-    """Call one Taasky tool and print its JSON result. Tool errors exit 1."""
+def tool_result(tool: str, arguments: dict) -> str:
+    """Call one Taasky tool and return its text. Tool errors exit 1."""
     result = rpc("tools/call", {"name": tool, "arguments": arguments})
     text = "\n".join(c.get("text", "") for c in result.get("content", []) if c.get("type") == "text")
     if result.get("isError"):
         sys.exit(f"error: {text}")
+    return text
+
+
+def show(text: str) -> None:
     try:
         print(json.dumps(json.loads(text), indent=2, ensure_ascii=False))
     except ValueError:
         print(text)
+
+
+def call(tool: str, arguments: dict) -> None:
+    """Call one Taasky tool and print its JSON result."""
+    show(tool_result(tool, arguments))
+
+
+def call_binding(tool: str, arguments: dict) -> None:
+    """Call a move that only the human may release, and insist it was parked for them.
+
+    Anything but status "pending_human" with a human_url exits 1 without
+    printing the result to stdout, so the agent cannot report the move as made.
+    """
+    text = tool_result(tool, arguments)
+    try:
+        data = json.loads(text)
+    except ValueError:
+        data = None
+    status = data.get("status") if isinstance(data, dict) else None
+    if status != "pending_human" or not data.get("human_url"):
+        print(f"server answered: {text[:500]}", file=sys.stderr)
+        sys.exit(
+            f"error: {tool} was not parked for the user's confirmation "
+            f"(status {status!r}, expected 'pending_human' with human_url). "
+            "Treat the move as not made, make no other move in this room, and tell the user."
+        )
+    show(text)
 
 
 def json_arg(value: str | None, name: str):
@@ -158,11 +193,11 @@ def cmd_propose(args):
 def cmd_respond(args):
     a = {"room": args.room, "decision": args.decision}
     put(a, "subject_hash", args.subject_hash)
-    call("negotiation_respond", a)
+    call_binding("negotiation_respond", a)
 
 
 def cmd_cancel(args):
-    call("negotiation_cancel", {"room": args.room})
+    call_binding("negotiation_cancel", {"room": args.room})
 
 
 def main():
@@ -175,7 +210,7 @@ def main():
     p = sub.add_parser("tools", help="list tools; WRITE marks anything not read-only")
     p.set_defaults(func=cmd_tools)
 
-    p = sub.add_parser("open", help="open a room; returns invite_url (and bind_url if Telegram is not linked)")
+    p = sub.add_parser("open", help="open a room; returns invite_url for the other side and human_url for the user")
     p.add_argument("--schema", required=True, help="subject_schema JSON, or - for stdin")
     p.add_argument("--limits", help="private limits JSON, seen only by Taasky")
     p.add_argument("--subject", help="opening offer JSON, matching --schema")
@@ -202,13 +237,13 @@ def main():
     p.add_argument("--deadline", help="RFC3339; replaces the room deadline, leaving it out clears it")
     p.set_defaults(func=cmd_propose)
 
-    p = sub.add_parser("respond", help="approve or reject; the human confirms in Telegram")
+    p = sub.add_parser("respond", help="approve or reject; parked until the user confirms at human_url")
     p.add_argument("--room", required=True)
     p.add_argument("--decision", required=True, choices=["approve", "reject"])
     p.add_argument("--subject-hash", help="required for approve: subject_hash from read")
     p.set_defaults(func=cmd_respond)
 
-    p = sub.add_parser("cancel", help="withdraw; the human confirms in Telegram")
+    p = sub.add_parser("cancel", help="withdraw; parked until the user confirms at human_url")
     p.add_argument("--room", required=True)
     p.set_defaults(func=cmd_cancel)
 
