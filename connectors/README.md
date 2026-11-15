@@ -142,7 +142,7 @@ Meta says many connector actions can be limited to read-only, important actions 
 | [railway](./railway/SKILL.md) | List projects and deployments, set variables, redeploy. |
 | [ramp](./ramp/SKILL.md) | Read-only view of corporate spend: transactions, cards and limits, users, departments. No spend actions by design. |
 | [readwise](./readwise/SKILL.md) | Search your highlights and books, save new highlights. |
-| [remove-bg](./remove-bg/SKILL.md) | Remove the background from an image with the remove.bg API: submit a local file or an image URL, get back a transparent PNG saved to a local path. Also check the account |
+| [remove-bg](./remove-bg/SKILL.md) | Remove the background from an image with remove.bg's model on Leonardo.Ai (the remove.bg API moved there on December 1, 2026): submit a local file or an image URL, get back a transparent PNG saved to a local path. |
 | [render](./render/SKILL.md) | List your Render services and recent deploys. Read-only. |
 | [replicate](./replicate/SKILL.md) | Run AI models, poll predictions. |
 | [resend](./resend/SKILL.md) | Send email through Resend and check delivery status. Every send is confirmed with you first. |
