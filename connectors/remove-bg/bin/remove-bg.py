@@ -1,30 +1,36 @@
 #!/usr/bin/env python3
-"""Minimal remove.bg API CLI for the muse-connectors remove-bg skill.
+"""Minimal remove.bg CLI for the muse-connectors remove-bg skill, served by Leonardo.Ai.
 
-Auth: API key loaded as a surrogate for `custom.remove-bg` via the bundled
-dynamic_credentials helper, sent as `X-Api-Key: YOUR_API_KEY` (placement
-resolved by the helper from the credential config). The real key never
-touches this script: the runtime swaps the surrogate on approved egress,
-only to api.remove.bg.
+remove.bg's API moved to Leonardo.Ai on December 1, 2026. Background removal now
+runs through Leonardo's sync API with the `remove-bg` model, following the official
+migration guide:
+https://docs.leonardo.ai/docs/migrate-from-the-removebg-api-to-leonardoai
 
-The /removebg response is image BINARY, not JSON: `process` saves it to the
---out path and prints the path. Every call burns paid credit, so confirm
-before processing.
+Auth: a Leonardo.Ai API key loaded as a surrogate for `custom.remove-bg` via the
+bundled dynamic_credentials helper, sent as `Authorization: Bearer YOUR_API_KEY`
+(placement resolved by the helper from the credential config). The real key never
+touches this script: the runtime swaps the surrogate on approved egress, only to
+cloud.leonardo.ai. remove.bg keys do not work on Leonardo.
+
+`process` asks for the result inline (`base64: true`, `ephemeral: true`), decodes
+`results[0].dataB64`, saves it to the --out path and prints the path along with the
+call's `cost`. Every call is billed, so confirm before processing.
 """
 from __future__ import annotations
 
 import argparse
+import base64
 import json
 import sys
 import urllib.error
-import urllib.parse
 import urllib.request
-import uuid
 
 HELPER_PATH = "/opt/hatch/skills/skill-creator/bin"
 CREDENTIAL_NAME = "custom.remove-bg"
-ALLOWED_HOSTS = ("api.remove.bg",)
-API = "https://api.remove.bg/v1.0"
+ALLOWED_HOSTS = ("cloud.leonardo.ai",)
+API = "https://cloud.leonardo.ai/api/rest/v2"
+SIZES = ("preview", "full", "auto", "50MP")
+TYPES = ("auto", "person", "product", "car", "animal", "graphic", "transportation", "other")
 
 try:
     sys.path.insert(0, HELPER_PATH)
@@ -32,7 +38,6 @@ try:
         DynamicCredentialError,
         add_surrogate_to_request,
         read_json_response,
-        read_response_body,
     )
 except ImportError:
     sys.exit(
@@ -44,25 +49,39 @@ except ImportError:
 def credential_error(exc: Exception) -> None:
     sys.exit(
         "error: no stored credential for custom.remove-bg "
-        f"({exc}). To connect, ask Muse to connect a remove.bg API key via "
-        "the secure credential flow, then retry."
+        f"({exc}). To connect, ask Muse to connect a Leonardo.Ai API key (remove.bg's "
+        "API moved to Leonardo.Ai) via the secure credential flow, then retry."
     )
+
+
+def error_message(body) -> str:
+    """Leonardo reports errors as `errors[0].message`, often with HTTP 200."""
+    if isinstance(body, dict):
+        errors = body.get("errors")
+        if isinstance(errors, list) and errors and isinstance(errors[0], dict):
+            return str(errors[0].get("message") or errors[0])
+        if body.get("error"):
+            return str(body["error"])
+    return ""
 
 
 def api_error(exc: urllib.error.HTTPError) -> None:
     try:
-        body = json.loads(exc.read().decode("utf-8", errors="replace"))
-        errors = body.get("errors") or []
-        msg = "; ".join(e.get("title", "") for e in errors) if errors else str(exc)
+        msg = error_message(json.loads(exc.read().decode("utf-8", errors="replace"))) or str(exc)
     except Exception:
         msg = str(exc)
-    sys.exit(f"error: remove.bg returned HTTP {exc.code}: {msg}")
+    hint = ""
+    if exc.code in (401, 403):
+        hint = " (remove.bg keys don't work here: reconnect custom.remove-bg with a Leonardo.Ai API key)"
+    sys.exit(f"error: Leonardo.Ai returned HTTP {exc.code}: {msg}{hint}")
 
 
-def authed_request(url: str, data: bytes | None, content_type: str | None):
+def authed_request(url: str, payload: dict | None = None):
     headers: dict[str, str] = {"Accept": "application/json"}
-    if content_type:
-        headers["Content-Type"] = content_type
+    data = None
+    if payload is not None:
+        headers["Content-Type"] = "application/json"
+        data = json.dumps(payload).encode("utf-8")
     req = urllib.request.Request(url, data=data, headers=headers, method="POST" if data else "GET")
     try:
         add_surrogate_to_request(req, CREDENTIAL_NAME, allowed_hosts=ALLOWED_HOSTS)
@@ -71,91 +90,71 @@ def authed_request(url: str, data: bytes | None, content_type: str | None):
     return req
 
 
-def cmd_auth(_args):
-    cmd_account(_args)
-
-
-def cmd_account(_args):
-    req = authed_request(API + "/account", None, None)
+def call(req, timeout: int):
     try:
-        with urllib.request.urlopen(req, timeout=30) as resp:
-            result = read_json_response(resp)
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            return read_json_response(resp)
     except urllib.error.HTTPError as exc:
         api_error(exc)
     except Exception as exc:
         sys.exit(f"error: request failed: {exc}")
-    data = result.get("data", {})
-    attrs = data.get("attributes", {})
-    print(json.dumps({"ok": True, "credits": (attrs.get("credits") or {}).get("total")}, indent=2))
 
 
-def encode_multipart(fields: dict, files: dict) -> tuple[bytes, str]:
-    """Build a multipart/form-data body. files: name -> (filename, bytes, mime)."""
-    boundary = uuid.uuid4().hex
-    parts: list[bytes] = []
-    for name, value in fields.items():
-        parts.append(
-            f'--{boundary}\r\nContent-Disposition: form-data; name="{name}"'
-            f"\r\n\r\n{value}\r\n".encode("utf-8")
-        )
-    for name, (filename, content, mime) in files.items():
-        parts.append(
-            f'--{boundary}\r\nContent-Disposition: form-data; name="{name}"; '
-            f'filename="{filename}"\r\nContent-Type: {mime}\r\n\r\n'.encode("utf-8")
-            + content + b"\r\n"
-        )
-    parts.append(f"--{boundary}--\r\n".encode("utf-8"))
-    return b"".join(parts), f"multipart/form-data; boundary={boundary}"
+def cmd_auth(_args):
+    # Read-only and free: listing the available models only needs a valid key.
+    result = call(authed_request(API + "/models"), timeout=30)
+    if error_message(result):
+        sys.exit(f"error: Leonardo.Ai: {error_message(result)}")
+    print(json.dumps({"ok": True}, indent=2))
 
 
 def cmd_process(args):
-    fields = {"size": args.size, "type": args.type}
-    files: dict = {}
     if args.file:
         try:
             with open(args.file, "rb") as fh:
-                content = fh.read()
+                image = {"type": "BASE64", "data": base64.b64encode(fh.read()).decode("ascii")}
         except OSError as exc:
             sys.exit(f"error: cannot read file: {exc}")
-        files["image_file"] = (args.file.split("/")[-1], content, "application/octet-stream")
     else:
-        fields["image_url"] = args.url
-    body, ctype = encode_multipart(fields, files)
-    req = authed_request(API + "/removebg", body, ctype)
-    try:
-        with urllib.request.urlopen(req, timeout=120) as resp:
-            image = read_response_body(resp)
-    except urllib.error.HTTPError as exc:
-        api_error(exc)
-    except Exception as exc:
-        sys.exit(f"error: request failed: {exc}")
+        image = {"type": "URL", "url": args.url}
+    payload = {
+        "model": "remove-bg",
+        "ephemeral": True,
+        "base64": True,
+        "parameters": {
+            "size": args.size,
+            "type": args.type,
+            "format": "png",
+            "guidances": {"image_reference": [{"image": image}]},
+        },
+    }
+    result = call(authed_request(API + "/generationssync", payload), timeout=120)
+    results = result.get("results") if isinstance(result, dict) else None
+    if not results or not results[0].get("dataB64"):
+        sys.exit(f"error: Leonardo.Ai: {error_message(result) or 'no image returned (blocked by moderation?)'}")
+    image_bytes = base64.b64decode(results[0]["dataB64"])
     try:
         with open(args.out, "wb") as fh:
-            fh.write(image)
+            fh.write(image_bytes)
     except OSError as exc:
         sys.exit(f"error: cannot write file: {exc}")
-    print(json.dumps({"saved_to": args.out, "bytes": len(image)}, indent=2))
+    print(json.dumps({"saved_to": args.out, "bytes": len(image_bytes), "cost": result.get("cost")}, indent=2))
 
 
 def main():
-    parser = argparse.ArgumentParser(description="remove.bg API CLI (muse-connectors)")
+    parser = argparse.ArgumentParser(description="remove.bg CLI on Leonardo.Ai (muse-connectors)")
     sub = parser.add_subparsers(dest="command", required=True)
 
-    p = sub.add_parser("auth", help="verify the connection (shows remaining credits)")
+    p = sub.add_parser("auth", help="verify the connection")
     p.set_defaults(func=cmd_auth)
-
-    p = sub.add_parser("account", help="credit balance and account info")
-    p.set_defaults(func=cmd_account)
 
     p = sub.add_parser("process", help="remove the background from an image")
     group = p.add_mutually_exclusive_group(required=True)
-    group.add_argument("--file", help="local image file path")
-    group.add_argument("--url", help="image URL to process")
+    group.add_argument("--file", help="local image file path (up to ~7.5MB)")
+    group.add_argument("--url", help="HTTPS image URL to process")
     p.add_argument("--out", required=True, help="local path to save the result PNG")
-    p.add_argument("--size", default="auto",
-                   help="preview, regular, hd, 4k, auto (default: auto)")
-    p.add_argument("--type", default="auto",
-                   help="auto, person, product, car (default: auto)")
+    p.add_argument("--size", default="auto", choices=SIZES, help="output resolution (default: auto)")
+    p.add_argument("--type", default="auto", choices=TYPES, help="foreground type (default: auto)")
     p.set_defaults(func=cmd_process)
 
     args = parser.parse_args()
