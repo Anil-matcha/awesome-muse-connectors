@@ -17,10 +17,10 @@ link. Pages are temporary: each one expires after its TTL (1-30 days, default
 15) and is then deleted. A page is unlisted by default; `--public` lists it in
 the public gallery, where anyone can find it.
 
-API contracts were checked against the public
-[OpenAPI document](https://brewpage.app/api/openapi.json) (contract 2.10.3) and
-the remote [MCP endpoint](https://brewpage.app/mcp) (server 1.16.10, 20 tools)
-on 2026-11-05. Service overview: [llms.txt](https://brewpage.app/llms.txt).
+MCP clients can connect directly to `https://brewpage.app/mcp` over Streamable
+HTTP. Version 3.0.0 exposes 13 tools and supports anonymous publishing and
+optional OAuth. The bundled Muse commands below use the REST API to manage
+pages. [OpenAPI contract](https://brewpage.app/api/openapi.json) · [Service guide](https://brewpage.app/llms.txt)
 
 ## Tooling
 All commands go through `bin/brewpage.py` (Python standard library only) and
