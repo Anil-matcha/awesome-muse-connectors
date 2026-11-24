@@ -14,6 +14,7 @@ A practical guide to Muapi's abliterated LLM API: 21 model-specific REST endpoin
 - [awesome-abliterated-llms](https://github.com/Anil-matcha/awesome-abliterated-llms) — a broader, source-aware index of hosted and open-weight abliterated LLMs.
 - [uncensored-coding-models](https://github.com/Anil-matcha/uncensored-coding-models) — coding-agent setup notes and model evaluations.
 - [awesome-uncensored-ai-agents](https://github.com/Anil-matcha/awesome-uncensored-ai-agents) — agent integrations, setup patterns, and safeguards.
+- [NSFW-AI-API](https://github.com/Anil-matcha/NSFW-AI-API) — NSFW detection and moderation for text and images, to screen prompts and outputs
 
 ## Overview
 
