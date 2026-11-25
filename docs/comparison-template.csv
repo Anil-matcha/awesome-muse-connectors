@@ -1,2 +1,0 @@
-model_id,test_date,prompt_id,input_tokens,output_tokens,latency_ms,task_success,refusal_observed,notes
-,,,,,,,,
